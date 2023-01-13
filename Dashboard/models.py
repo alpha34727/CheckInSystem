@@ -7,7 +7,7 @@ class Member(models.Model):
     Name = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"ID {self.id} / {self.Name}"
+        return f"{self.Name}"
 
 #出缺勤紀錄
 class Attendant(models.Model):
