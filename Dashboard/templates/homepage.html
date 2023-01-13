@@ -1,20 +1,39 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    {% if user.is_authenticated %}
-        <h1>{{ user.username }}，歡迎</h1>
-        <h2><a href="{% url 'apply' %}">我要請假</a></h2>
-    {% endif %}
+    <div class="container me-2" style="width: 72%">
+        <div class="card me-2 c-no-border c-shadow-lg-nd" style="width: 100%">
+            <div class="card-body">
+                <h1>{{ user.username }}，歡迎</h1>
+    
+                {% if ctx|length > 0 %}
+                <h2>等待審核的申請<h2>
+                {% for apply in ctx %}
+                    {% if not apply.Applied and apply.MemberID == user.id %}
+                        <p>{{ apply.Info }} ( {{ apply.Start }} ~ {{ apply.End }})</P>
+                    {% endif %}
+                {% endfor %}
+                {% else %}
+                    <h2>您還沒有任何請假申請</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
-    {% if ctx|length > 0 %}
-        <h2>等待審核的申請<h2>
-        {% for apply in ctx %}
-            {% if not apply.Applied and apply.MemberID == user.id %}
-                <p>{{ apply.Info }} ( {{ apply.Start }} ~ {{ apply.End }})</P>
-            {% endif %}
-        {% endfor %}
-    {% else %}
-        <h2>您還沒有任何請假申請</h2>
-    {% endif %}
+    <div class="container ms-2 d-flex flex-column align-items-start" style="width: 28%">
+        <div class="card c-no-border c-shadow-lg-nd" style="width: 100%">
+            <div class="card-body">
+                <h3 class="card-title">簽到</h3>
+                <a href="{% url 'apply' %}"><button type="button" class="btn btn-primary btn-lg">請假申請</button></a>
+            </div>
+        </div>
+        <div class="card mt-4 c-no-border c-shadow-lg-nd" style="width: 100%">
+            <div class="card-body">
+                <h3 class="card-title">功能</h3>
+                <a href="{% url 'apply' %}"><button type="button" class="btn btn-primary btn-lg">請假申請</button></a>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock body %}

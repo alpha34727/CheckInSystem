@@ -3,18 +3,18 @@
 {% block body %}
     <form action="" method="post">
         {% csrf_token %}
-        <p>
-            <label for="id_Start">開始：</label>
-            <input type="datetime-local" name="Start" required="" id="id_Start">
-        </p>
-        <p>
-            <label for="id_End">結束：</label>
-            <input type="datetime-local" name="End" required="" id="id_End">
-        </p> 
-        <p>
+        <div class="mb-3">
+            <label for="id_Start" class="form-label">開始時間：</label>
+            <input type="datetime-local" class="form-control" name="Start" required="" id="id_Start">
+        </div>
+        <div class="mb-3">
+            <label for="id_End">結束時間：</label>
+            <input type="datetime-local" class="form-control" name="End" required="" id="id_End">
+        </div> 
+        <div class="mb-3">
             <label for="id_Info">資訊：</label>
-            <textarea name="Info" cols="40" rows="10" required="" id="id_Info"></textarea>
-        </p>
-        <input type="submit" value="送出">
+            <textarea name="Info" class="form-control"cols="40" rows="10" required="" id="id_Info"></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg" value="送出">
     </form>
 {% endblock body %}
