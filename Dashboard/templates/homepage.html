@@ -2,13 +2,19 @@
 
 {% block body %}
     {% if user.is_authenticated %}
-        <h1>{{ user.username }} 歡迎</h1>
-        <h2><a>我要請假</a></h2>
-    {% else %}
-        <h1>訪客，歡迎</h1>
-        <h2>登入</h2>
+        <h1>{{ user.username }}，歡迎</h1>
+        <h2><a href="{% url 'apply' %}">我要請假</a></h2>
     {% endif %}
 
+    {% if ctx|length > 0 %}
+        <h2>等待審核的申請<h2>
+        {% for apply in ctx %}
+            {% if not apply.Applied and apply.MemberID == user.id %}
+                <p>{{ apply.Info }} ( {{ apply.Start }} ~ {{ apply.End }})</P>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h2>您還沒有任何請假申請</h2>
+    {% endif %}
 
-    
 {% endblock body %}
