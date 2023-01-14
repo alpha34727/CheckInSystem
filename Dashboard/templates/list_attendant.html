@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load tz %}
+{% load define %}
+
+{% block body %}
+    <div class="container d-flex align-items-start justify-content-center" style="width: 60%">
+        <div class="container me-2" style="width: 40%">
+            <h1 class="fs-1">{{ Now.year }}年</h1>
+            <h1 class="fs-1">{{ month }}月</h1>
+        </div>
+        <div class="container me-2 login_form" style="width: 60%">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="fs-3">日期</td>
+                        <td class="fs-3">開始</td>
+                        <td class="fs-3">結束</td>
+                    </tr>
+                    {% for date in day_loop %}
+                        <tr>
+                            <td class="fs-5">{{ Now.month }}/{{ date }}</td>
+                            <td class="fs-5">
+                                {% define True as continue %}
+                                {% for i in ctx %}
+                                    {% if continue and user.id == i.MemberID and i.Start.astimezone.year == Now.year and i.Start.astimezone.month == Now.month and i.Start.astimezone.day == date %}
+                                        {{ i.Start|date:'H:i' }}
+                                        {% define False as continue %}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="fs-5">
+                                {% define True as continue %}
+                                {% for i in ctx %}
+                                    {% if continue and user.id == i.MemberID and i.End.astimezone.year == Now.year and i.End.astimezone.month == Now.month and i.End.astimezone.day == date %}
+                                        {{ i.End|date:'H:i' }}
+                                        {% define False as continue %}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock body %}

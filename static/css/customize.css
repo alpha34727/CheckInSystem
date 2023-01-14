@@ -1,10 +1,14 @@
 :root {
-    --bs-font-sans-serif: 'Noto Sans TC', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-sans-serif: 'Open Sans', 'Noto Sans TC', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .material-symbols-outlined {
     font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 50;
     padding-top: 2px;
+}
+
+.navbar{
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='48' width='48'%3E%3Cpath d='M6 36v-3h36v3Zm0-10.5v-3h36v3ZM6 15v-3h36v3Z'/%3E%3C/svg%3E");
 }
 
 .c-navbar {
@@ -67,4 +71,40 @@ body {
     color: #842029;
     background-color: #f8d7da;
     border-color: #f5c2c7;
+}
+
+.c-w-100{
+    font-weight: 100;
+}
+
+.c-w-200{
+    font-weight: 200;
+}
+
+.c-w-300{
+    font-weight: 300;
+}
+
+.c-w-400{
+    font-weight: 400;
+}
+
+.c-w-500{
+    font-weight: 500;
+}
+
+.c-w-600{
+    font-weight: 600;
+}
+
+.c-w-700{
+    font-weight: 700;
+}
+
+.c-w-800{
+    font-weight: 800;
+}
+
+.c-w-900{
+    font-weight: 900;
 }

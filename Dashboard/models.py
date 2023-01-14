@@ -2,12 +2,14 @@ from django.db import models
 
 # Create your models here.
 
-# #組織成員
-# class Member(models.Model):
-#     Name = models.CharField(max_length=50)
+#組織成員
+class Member(models.Model):
+    MemberID = models.IntegerField()
+    CheckIn = models.BooleanField(default=False)
+    StartTime = models.DateTimeField()
 
-#     def __str__(self):
-#         return f"{self.Name}"
+    def __str__(self):
+        return f"{self.MemberID}"
 
 #請假(補假)申請、紀錄
 class LeaveApply(models.Model):
@@ -25,7 +27,7 @@ class Attendant(models.Model):
     MemberID = models.IntegerField()
     Start = models.DateTimeField()
     End = models.DateTimeField()
-    Info = models.TextField()
+    Info = models.TextField(default="")
 
     def __str__(self):
         return f"ID {self.id} / {self.Start} ~ {self.End} / {self.Info}"

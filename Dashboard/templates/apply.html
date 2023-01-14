@@ -1,20 +1,26 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="id_Start" class="form-label">開始時間：</label>
-            <input type="datetime-local" class="form-control" name="Start" required="" id="id_Start">
-        </div>
-        <div class="mb-3">
-            <label for="id_End">結束時間：</label>
-            <input type="datetime-local" class="form-control" name="End" required="" id="id_End">
-        </div> 
-        <div class="mb-3">
-            <label for="id_Info">資訊：</label>
-            <textarea name="Info" class="form-control"cols="40" rows="10" required="" id="id_Info"></textarea>
-        </div>
-        <input type="submit" class="btn btn-primary btn-lg" value="送出">
-    </form>
+    <div class="container me-2" style="width: 30%">
+        <h1 class="fs-1">請假申請</h1>
+        <h3 class="fs-3">請輸入申請請假時段，<br>並填寫詳細請假原因</h3>
+    </div>
+    <div class="container me-2 login_form" style="width: 70%">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_Start" class="form-label fs-5">開始時間：</label>
+                <input type="datetime-local" class="form-control fs-5" name="Start" required="" id="id_Start">
+            </div>
+            <div class="mb-3">
+                <label for="id_End" class="form-label fs-5">結束時間：</label>
+                <input type="datetime-local" class="form-control fs-5" name="End" required="" id="id_End">
+            </div> 
+            <div class="mb-3">
+                <label for="id_Info" class="form-label fs-5">資訊：</label>
+                <textarea name="Info" class="form-control fs-5" cols="40" rows="10" required="" id="id_Info"></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg" value="送出">
+        </form>
+    </div>
 {% endblock body %}
