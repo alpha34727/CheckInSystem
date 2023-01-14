@@ -3,6 +3,7 @@ from django.views.generic import ListView, CreateView, RedirectView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from .form import PromiseForm
 from .models import LeaveApply, Member, Attendant
@@ -116,3 +117,8 @@ def register(req):
         return redirect(reverse_lazy('home'))
     else:
         return render(req, 'registration/register.html', {'form':form})
+
+class PasswordChange(LoginRequiredMixin, PasswordChangeView):
+    login_url = reverse_lazy('login')
+
+    template_name = 'registration/password.html'
