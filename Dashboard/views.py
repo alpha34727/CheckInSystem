@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, RedirectView
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
@@ -105,3 +106,13 @@ class ListAttendant(LoginRequiredMixin, ListView):
 
     template_name = 'list_attendant.html'
     context_object_name = 'ctx'
+
+def register(req):
+    form = UserCreationForm(req.POST)
+    if form.is_valid():
+        form.save()
+        Member.objects.create(MemberID=User.objects.last().id)
+
+        return redirect(reverse_lazy('home'))
+    else:
+        return render(req, 'registration/register.html', {'form':form})

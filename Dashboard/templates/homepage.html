@@ -53,7 +53,9 @@
                                 {% endif %}
                                 {% define False as continue %}
                             {% endif %}
-                            {% if continue and forloop.last %}
+                            {% if continue and forloop.last and check %}
+                                <h3 class="fs-5">您已於{{ start|date:'m/d H:i' }}打卡</h3>
+                            {% elif continue and forloop.last and not check %}
                                 <h3 class="fs-5">您尚未打卡</h3>
                             {% endif %}
                         {% endfor %}

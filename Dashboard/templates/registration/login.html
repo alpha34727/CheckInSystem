@@ -3,7 +3,9 @@
 {% block body %}
     <div class="container me-2" style="width: 40%">
         <h1 class="fs-1">訪客您好，</h1>
-        <h3  class="fs-3">請先登入再使用線上出缺勤管理系統</h3>
+        <h3 class="fs-3">請先登入再使用線上出缺勤管理系統</h3>
+        <h3 class="h3 mt-5">還沒註冊？<a href="{% url 'register' %}"><button class="btn btn-primary btn-lg">註冊</button></a></h3>
+        
     </div>
     <div class="container me-2 login_form" style="width: 60%">
         <form action="" method="post">

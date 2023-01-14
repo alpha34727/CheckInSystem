@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container me-2" style="width: 40%">
+        <h1 class="fs-1">訪客您好，</h1>
+        <h3  class="fs-3">註冊一個帳號以享受各種功能</h3>
+    </div>
+    <div class="container me-2 login_form" style="width: 60%">
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <p>
+                <label for="id_username">使用者名稱：</label>
+                <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
+                <span class="helptext">必要的。150 個字或更少，只包含字母、數字和 @/./+/-/_。</span>
+            </p>
+            {% if form.errors.username %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <span>{{ form.errors.username }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            
+            <p>
+                <label for="id_password1">密碼：</label>
+                <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+                <span class="helptext"></span>
+            </p>
+            {% if form.errors.password1 %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <span>{{ form.errors.password1 }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+
+            <p>
+                <label for="id_password2">密碼確認：</label>
+                <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+                <span class="helptext">為檢查用，請輸入與前面相同的密碼。</span>
+            </p>
+            {% if form.errors.password2 %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <span>{{ form.errors.password2 }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+
+            <input type="submit" class="btn btn-primary btn-lg" value="註冊">
+        </form>
+    </div>
+{% endblock body %}
