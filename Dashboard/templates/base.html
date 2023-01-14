@@ -42,16 +42,8 @@
                                 <li><a class="dropdown-item" href="{% url 'apply' %}">請假申請</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{% url 'home' %}" id="navbarDropdownCheckIn" role="button" data-bs-toggle="dropdown" aria-expanded="false">打卡</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownCheckIn">
-                                {% if check %}
-                                    <li><a class="dropdown-item" href="{% url 'check' user.id %}">退卡</a></li>
-                                {% else %}
-                                    <li><a class="dropdown-item" href="{% url 'check' user.id %}">打卡</a></li>
-                                {% endif %}
-                                <li><a class="dropdown-item" href="{% url 'attendant' %}">打卡紀錄</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'attendant' %}">打卡紀錄</a>
                         </li>
                     {% endif %}
                 </ul>
