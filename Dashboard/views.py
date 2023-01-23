@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from .form import PromiseForm
 from .models import LeaveApply, Member, Attendant
 from django.utils import timezone
-import pytz
+import calendar
 
 # Create your views here.
 
@@ -20,10 +20,10 @@ class Homepage(LoginRequiredMixin, ListView):
 
     def get_context_data(self):
         content = super().get_context_data()
+        content['Now'] = timezone.localtime()
         content['check'] = Member.objects.get(MemberID=self.request.user.id).CheckIn
         content['hadcheck'] = Attendant.objects.filter(MemberID=self.request.user.id)
         content['start'] = Member.objects.get(MemberID=self.request.user.id).StartTime
-        content['Now'] = timezone.localtime()
         
         return content
 
@@ -41,6 +41,7 @@ class Apply(LoginRequiredMixin, CreateView):
 
     def get_context_data(self):
         content = super().get_context_data()
+        content['Now'] = timezone.localtime()
         content['check'] = Member.objects.get(MemberID=self.request.user.id).CheckIn
         
         return content
@@ -63,12 +64,11 @@ class CheckIn(LoginRequiredMixin, RedirectView):
 
         return reverse_lazy('home')
 
-class ListAttendant(LoginRequiredMixin, ListView):
-    model=Attendant
-    login_url = reverse_lazy('login')
+class CheckAttendant(LoginRequiredMixin, ListView):
+    model = Attendant
 
     def get_context_data(self):
-        month = timezone.localtime().month
+        month = self.kwargs['month']
         if month == 1:
             month_str = "一"
         elif month == 2:
@@ -94,18 +94,25 @@ class ListAttendant(LoginRequiredMixin, ListView):
         elif month == 12:
             month_str = "十二"
         else:
-            month_str = "123"
+            month_str = "一"
 
         content = super().get_context_data()
-        content['month'] = month_str
         content['Now'] = timezone.localtime()
-        content['day_loop'] = range(1, timezone.localtime().day + 1)
+        content['month'] = month_str
+        if self.kwargs['year'] == timezone.localtime().year and self.kwargs['month'] == timezone.localtime().month:
+            content['day_loop'] = range(1, timezone.localtime().day + 1)
+        else:
+            content['day_loop'] = range(1, calendar.monthrange(self.kwargs['year'], self.kwargs['month'])[1] + 1)
         content['check'] = Member.objects.get(MemberID=self.request.user.id).CheckIn
-        
-        
+        content['Y'] = self.kwargs['year']
+        if 1 <= self.kwargs['month'] and self.kwargs['month'] <= 12:
+            content['M'] = self.kwargs['month']
+        else:
+            content['M'] = 1
+
         return content
 
-    template_name = 'list_attendant.html'
+    template_name = 'check_attendant.html'
     context_object_name = 'ctx'
 
 def register(req):
@@ -122,3 +129,9 @@ class PasswordChange(LoginRequiredMixin, PasswordChangeView):
     login_url = reverse_lazy('login')
 
     template_name = 'registration/password.html'
+
+    def get_context_data(self):
+        content = super().get_context_data()
+        content['Now'] = timezone.localtime()
+        return content
+    

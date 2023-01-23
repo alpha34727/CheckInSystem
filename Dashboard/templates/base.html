@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    {% block head %}{% endblock head %}
     <link rel="stylesheet" href="{% static '/css/customize.css' %}">
 
     <title>出缺勤管理系統</title>
@@ -43,7 +42,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'attendant' %}">打卡紀錄</a>
+                            <a class="nav-link" href="{% url 'attcheck' Now.year Now.month %}">打卡紀錄</a>
                         </li>
                     {% endif %}
                 </ul>
